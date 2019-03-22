@@ -275,5 +275,6 @@ struct m10_result_t {
 	double w {0.0};
 };
 m10_result_t milestone_10();
-
+// f9, u2
+void milestone_20(double,double);
 
