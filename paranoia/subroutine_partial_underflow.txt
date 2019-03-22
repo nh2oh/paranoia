@@ -1,0 +1,77 @@
+4640 '___ Subroutine to test  Z & Z$  for Partial Underflow ___
+4650 N=0 : IF (Z=0) THEN RETURN
+4660 PRINT "Since Comparison denies  ";Z$;" = 0 , evaluating  (";Z$;"+";Z$;")/";Z$;"  should be safe;" : PRINT "what the machine gets for  (";Z$;"+";Z$;")/";Z$;"  is   "; : Q9=(Z+Z)/Z : PRINT Q9 : IF (ABS(Q9-O2)<B*U2) THEN 4750
+4670 IF (Q9<O1 OR Q9>O2) THEN 4740
+4680 N=1 : J2=J2+1 : PRINT "This is a DEFECT." : PRINT : GOTO 4760
+4690 ' ___ Subroutine to test  Z & Z$ for Partial Overflow ___
+4700 N=0 : PRINT "Since Comparison alleges ";Z$;" =";Z;" is finite" : PRINT "and nonzero, the next two expressions should not over/underflow:" : V9=Z*F2
+4710 PRINT "The machine computes  (0.5*";Z$;")/";Z$;" ="; : Q9=V9/Z : PRINT Q9
+4720 PRINT "The machine computes  ";Z$;"/(0.5*";Z$;") ="; : V9=Z/V9 : PRINT V9
+4730 IF (ABS(Q9-F2)<U2 AND ABS(V9-O2)<B*U2) THEN 4750
+4740 N=1 : J1=J1+1 : PRINT "This is a VERY SERIOUS DEFECT." : PRINT : GOTO 4760
+4750 PRINT "  This is O.K. provided Over/Underflow has NOT just been signaled."
+4760 V9=Z*O1 : X9=V9 : V9=O1*Z : Y9=V9 : V9=Z/O1 : IF (Z=X9 AND Z=Y9 AND Z=V9) THEN 4840
+4770 N=1 : J2=J2+1
+4780  PRINT "DEFECT:  What prints as  ";Z$;" =";Z;" compares different from"
+4790 IF NOT (Z=X9) THEN PRINT "           ";Z$;"*1 = ";X9
+4800 IF NOT (Z=Y9 OR Y9=X9) THEN PRINT "           1*";Z$;" = ";Y9
+4810 IF NOT (Z=V9) THEN PRINT "           ";Z$;"/1 = ";V9
+4820 IF (Y9=X9) THEN 4840
+4830 J2=J2+1 : PRINT "DEFECT:";M$;" does not commute; comparison alleges that" : PRINT "         1*";Z$;" =";Y9;"  differs from  ";Z$;"*1 =";X9
+4840 IF (N>0) THEN GOSUB 110 : ' ---- PAUSE ----
+4850 RETURN : ' end of test for Partial Over/Underflow
+
+
+
+
+
+
+
+
+
+4640 '___ Subroutine to test  Z & Z$  for Partial Underflow ___
+
+4650 N=0 : IF (Z=0) THEN RETURN
+
+4660 PRINT "Since Comparison denies  ";Z$;" = 0 , evaluating  (";Z$;"+";Z$;")/";Z$;"  should be safe;" : PRINT "what the machine gets for  (";Z$;"+";Z$;")/";Z$;"  is   "; : Q9=(Z+Z)/Z : PRINT Q9 : IF (ABS(Q9-O2)<B*U2) THEN 4750 {
+	4750 PRINT "  This is O.K. provided Over/Underflow has NOT just been signaled."
+} else {
+	4670 IF (Q9<O1 OR Q9>O2) THEN 4740 {
+		4740 N=1 : J1=J1+1 : PRINT "This is a VERY SERIOUS DEFECT." : PRINT : GOTO 4760
+	} else {
+		4680 N=1 : J2=J2+1 : PRINT "This is a DEFECT." : PRINT : GOTO 4760
+	}
+	
+	4760 V9=Z*O1 : X9=V9 : V9=O1*Z : Y9=V9 : V9=Z/O1 : IF (Z=X9 AND Z=Y9 AND Z=V9) THEN 4840 {
+		4840 IF (N>0) THEN GOSUB 110 : ' ---- PAUSE ----
+		4850 RETURN : ' end of test for Partial Over/Underflow
+	}
+	
+	4770 N=1 : J2=J2+1
+	4780  PRINT "DEFECT:  What prints as  ";Z$;" =";Z;" compares different from"
+	4790 IF NOT (Z=X9) THEN PRINT "           ";Z$;"*1 = ";X9
+	4800 IF NOT (Z=Y9 OR Y9=X9) THEN PRINT "           1*";Z$;" = ";Y9
+	4810 IF NOT (Z=V9) THEN PRINT "           ";Z$;"/1 = ";V9
+	
+	4820 IF (Y9=X9) THEN 4840 {
+		4840 IF (N>0) THEN GOSUB 110 : ' ---- PAUSE ----
+		4850 RETURN : ' end of test for Partial Over/Underflow
+	} else {
+		4830 J2=J2+1 : PRINT "DEFECT:";M$;" does not commute; comparison alleges that" : PRINT "         1*";Z$;" =";Y9;"  differs from  ";Z$;"*1 =";X9
+	}
+	
+	4760 V9=Z*O1 : X9=V9 : V9=O1*Z : Y9=V9 : V9=Z/O1 : IF (Z=X9 AND Z=Y9 AND Z=V9) THEN 4840 {
+		4840 IF (N>0) THEN GOSUB 110 : ' ---- PAUSE ----
+		4850 RETURN : ' end of test for Partial Over/Underflow
+	}
+	
+}
+
+4760 V9=Z*O1 : X9=V9 : V9=O1*Z : Y9=V9 : V9=Z/O1 : IF (Z=X9 AND Z=Y9 AND Z=V9) THEN 4840 {
+	4840 IF (N>0) THEN GOSUB 110 : ' ---- PAUSE ----
+	4850 RETURN : ' end of test for Partial Over/Underflow
+} else {
+	4830 J2=J2+1 : PRINT "DEFECT:";M$;" does not commute; comparison alleges that" : PRINT "         1*";Z$;" =";Y9;"  differs from  ";Z$;"*1 =";X9
+	4840 IF (N>0) THEN GOSUB 110 : ' ---- PAUSE ----
+	4850 RETURN : ' end of test for Partial Over/Underflow
+}

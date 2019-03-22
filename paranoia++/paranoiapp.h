@@ -221,6 +221,14 @@ q
 */
 
 #include <string>
+#include <cstdint>
+
+static std::array<int,4> g_error_count ;
+
+#define Flaw    3
+#define Defect  2
+#define Serious 1
+#define Failure 0
 
 typedef void (*Sig_type)(int);
 double Sign(double), Random();
@@ -230,6 +238,7 @@ void TstCond(int, int, const char*);
 void notify(const char*);
 int read(int, const char*, int);
 
+void milestone_7();
 
 std::string print_error(int, const std::string&);
 
@@ -248,4 +257,5 @@ void SR3750();
 void SR3980();
 void TstPtUf();
 
-
+// Z, radix, U2
+void test_partial_underflow(double,double,double);
