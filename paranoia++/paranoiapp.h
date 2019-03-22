@@ -277,4 +277,9 @@ struct m10_result_t {
 m10_result_t milestone_10();
 // f9, u2
 void milestone_20(double,double);
-
+struct m25_result_t {
+	double precision {0.0};
+	double b_minus_u2 {0.0};
+};
+// radix, precision, u1, u2
+m25_result_t milestone_25(double,double,double,double);
