@@ -6,10 +6,11 @@
 #include <iomanip>  // std::setprecision()
 
 //
-// Sets globals:  
+// Sets globals:  X, X1, Y, Y1, Z, Z1, Z2
 //
-// 
-//
+// X, Y, Z are reset in milestone 35 before first use.  
+// X1, Y1, Z1, Z2 appear to be next used in milestone 85, which resets them 
+// before use.  
 // 
 //
 void milestone_30(double radix, double u1, double u2, double f9) {

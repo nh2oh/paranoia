@@ -12,7 +12,7 @@
 //
 // Milestone 20 (which is the next one) uses F9, U2, but not Radix or
 //   Precision.  Milestone 25 (next after 20) uses Radix, Precision,
-//   and possibly others.  Milestone 85 appears to depend on this milestone
+//   and possibly others.  Milestone 35 appears to depend on this milestone
 //   setting W.  
 //
 // Alters the globals W, Y, Z, Precision, Radix, U1
