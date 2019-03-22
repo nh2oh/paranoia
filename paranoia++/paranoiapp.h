@@ -222,6 +222,29 @@ q
 
 
 
+typedef void (*Sig_type)(int);
+double Sign(double), Random();
+void BadCond(int, const char*);
+void SqXMinX(int);
+void TstCond(int, int, const char*);
+void notify(const char*);
+int read(int, const char*, int);
+
+
+
+//#undef V9
+void Characteristics();
+void Heading();
+void History();
+void Instructions();
+void IsYeqX();
+void NewD();
+void Pause();
+void PrintIfNPositive();
+void SR3750();
+void SR3980();
+void TstPtUf();
+
 
 
 
