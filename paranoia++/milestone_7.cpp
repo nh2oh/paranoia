@@ -4,7 +4,7 @@
 #include <array>
 
 //
-//
+// The orig. version set U2 and Radix if (z!=0.0); otherwise it did not.  
 //
 //
 void milestone_7() {

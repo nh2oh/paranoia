@@ -266,3 +266,14 @@ std::string print_error(int, const std::string&);
 // Z, radix, U2
 void test_partial_underflow(double,double,double);
 void milestone_7();
+struct m10_result_t {
+	double radix {0.0};
+	double precision {0.0};
+	double u1 {0.0};
+	double u2 {0.0};
+	double f9 {0.0};
+	double w {0.0};
+};
+m10_result_t milestone_10();
+
+
