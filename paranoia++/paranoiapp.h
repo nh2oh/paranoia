@@ -222,6 +222,7 @@ q
 
 #include <string>
 #include <cstdint>
+#include <array>
 
 static std::array<int,4> g_error_count ;
 
@@ -238,9 +239,7 @@ void TstCond(int, int, const char*);
 void notify(const char*);
 int read(int, const char*, int);
 
-void milestone_7();
 
-std::string print_error(int, const std::string&);
 
 void sigfpe(int);
 
@@ -257,5 +256,11 @@ void SR3750();
 void SR3980();
 void TstPtUf();
 
+
+
+std::string print_error(int, const std::string&);
+
 // Z, radix, U2
 void test_partial_underflow(double,double,double);
+
+void milestone_7();
