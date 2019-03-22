@@ -230,7 +230,7 @@ void TstCond(int, int, const char*);
 void notify(const char*);
 int read(int, const char*, int);
 
-
+void sigfpe(int);
 
 //#undef V9
 void Characteristics();
