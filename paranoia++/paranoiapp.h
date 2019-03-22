@@ -224,7 +224,7 @@ q
 #include <cstdint>
 #include <array>
 
-static std::array<int,4> g_error_count ;
+
 
 #define Flaw    3
 #define Defect  2
@@ -257,10 +257,12 @@ void SR3980();
 void TstPtUf();
 
 
+// Rewrites
+
+extern std::array<int,4> g_error_count ;
 
 std::string print_error(int, const std::string&);
 
 // Z, radix, U2
 void test_partial_underflow(double,double,double);
-
 void milestone_7();

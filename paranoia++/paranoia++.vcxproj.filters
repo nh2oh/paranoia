@@ -18,10 +18,10 @@
     <ClCompile Include="paranoiapp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="milestones.cpp">
+    <ClCompile Include="test_partial_underflow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test_partial_underflow.cpp">
+    <ClCompile Include="milestone_7.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

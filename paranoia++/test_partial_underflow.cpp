@@ -12,6 +12,9 @@
 //
 // I have commented out writes to sigsave and the test if(setjmp(ovfl_buf)) {...
 //
+// zero_in is the number being tested for underflow => "zero_in" is not a great
+// name; TstPtUf() makes the tests on the global Z
+//
 void test_partial_underflow(double zero_in, double radix, double u2) {
 	std::cout << std::setprecision(18);
 	const double one = 1;

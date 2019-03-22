@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="milestones.cpp" />
+    <ClCompile Include="milestone_7.cpp" />
     <ClCompile Include="paranoiapp.cpp" />
     <ClCompile Include="test_partial_underflow.cpp" />
   </ItemGroup>
