@@ -27,10 +27,13 @@
     <ClCompile Include="milestone_10.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="milesgtone_20.cpp">
+    <ClCompile Include="milestone_25.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="milestone_25.cpp">
+    <ClCompile Include="milestone_30.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="milestone_20.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
