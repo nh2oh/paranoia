@@ -220,7 +220,7 @@ q
 
 */
 
-
+#include <string>
 
 typedef void (*Sig_type)(int);
 double Sign(double), Random();
@@ -229,6 +229,9 @@ void SqXMinX(int);
 void TstCond(int, int, const char*);
 void notify(const char*);
 int read(int, const char*, int);
+
+
+std::string print_error(int, const std::string&);
 
 void sigfpe(int);
 
