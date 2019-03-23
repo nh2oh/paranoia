@@ -285,6 +285,7 @@ struct m25_result_t {
 m25_result_t milestone_25(double,double,double,double);
 // radix,u1,u2,f9
 void milestone_30(double,double,double,double);
-
+// radix,u1,u2,f9,w,b_minus_u2
+void milestone_35(double,double,double,double,double,double);
 
 
