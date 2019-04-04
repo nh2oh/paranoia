@@ -286,6 +286,11 @@ m25_result_t milestone_25(double,double,double,double);
 // radix,u1,u2,f9
 void milestone_30(double,double,double,double);
 // radix,u1,u2,f9,w,b_minus_u2
-void milestone_35(double,double,double,double,double,double);
+struct m35_result_t {
+	int g_mult {0};
+	int g_div {0};
+	int g_add_sub {0};
+};
+m35_result_t milestone_35(double,double,double,double,double,double);
 
 

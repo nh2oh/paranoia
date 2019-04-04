@@ -1,17 +1,35 @@
 #include "paranoiapp.h"
 #include <iostream>
 #include <string>
-#include <array>
 #include <cmath>
 #include <iomanip>  // std::setprecision()
 
 //
-// Sets globals:  
+// Sets globals:  X,Y,Z,T,R;  GMult,GDiv,GAddSub;  StickyBit
+// Reads, but does not set:  F9,U1,U2,W,Radix,BMinusU2
 //
+// First use of...
+//     X, milestone 40, reset to Radix
+//     Y, milestone 40, reset to Ainverse
+//     Z, milestone 40, reset to X * Y - Half;
+//     T, milestone 40, reset to Y * Y1;
+//     R, milestone 120, reset to H+H || std::sqrt(Underflow/UfThold);
+//         Both conditional on UfNGrad
+//      , milestone 140, reset to Y + Q;  unconditional
+//     Appears that the value of R set here in 35 is not important
 // 
-// 
+//     StickyBit, milestone 40, reset to Y * Y1;
+//         Conditional on ((X == Zero) && (Y == Zero) && (Z == Zero) && (T <= Zero))
+//     StickyBit, milestone 50, reset to Z + T;
+//         Unconditional
+//     Thus it appears that the state of StickyBit as set in milestone_35() is not
+//     important.  
 //
-void milestone_35(double radix, double u1, double u2, double f9, double w, double b_minus_u2) {
+//     GMult is required by milestone 40
+//     GDiv is required conditionally in milestone 45
+//     GAddSub is required by milestone 50
+//
+m35_result_t milestone_35(double radix, double u1, double u2, double f9, double w, double b_minus_u2) {
 	double zero = 0;
 	double one = 1;
 	double two = one+one;
@@ -31,7 +49,7 @@ void milestone_35(double radix, double u1, double u2, double f9, double w, doubl
 		double y = x+one;
 		double z = y-x;
 		double t = z+u2;
-		double x = t-z;
+		x = t-z;
 		if (x!=u2) {
 			g_error_count[Failure] += 1;
 			std::cout << print_error(Failure,
@@ -165,6 +183,12 @@ void milestone_35(double radix, double u1, double u2, double f9, double w, doubl
 	//if (GMult == Yes && GDiv == Yes && GAddSub == Yes) printf(
 	//	"     *, /, and - appear to have guard digits, as they should.\n");
 
+	m35_result_t result;
+	result.g_add_sub = g_add_sub;
+	result.g_div = g_div;
+	result.g_mult = g_mult;
+
+	return result;
 }
 
 //
