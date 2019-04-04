@@ -125,28 +125,45 @@ void milestone_35(double radix, double u1, double u2, double f9, double w, doubl
 	double sticky_bit = t/radix;
 	x = r-x;
 	y = sticky_bit - y;
-	TstCond (Failure, X == Zero && Y == Zero,
-			"* and/or / gets too many last digits wrong");
+	if ((x!=zero) || (y!=zero)) {
+		g_error_count[Failure] += 1;
+		std::cout << print_error(Failure, "* and/or / gets too many last digits wrong");
+	}
+	//TstCond (Failure, X == Zero && Y == Zero,
+	//		"* and/or / gets too many last digits wrong");
+
+
 	y = one-u1;
 	x = one-f9;
 	y = one-y;
 	t = radix-u2;
 	z = radix-b_minus_u2;
 	t = radix-t;
-	if ((X == U1) && (Y == U1) && (Z == U2) && (T == U2)) GAddSub = Yes;
-	else {
-		GAddSub = No;
-		TstCond (Serious, False,
-			"- lacks Guard Digit, so cancellation is obscured");
-		}
-	if (F9 != One && F9 - One >= Zero) {
-		BadCond(Serious, "comparison alleges  (1-U1) < 1  although\n");
-		printf("  subtraction yields  (1-U1) - 1 = 0 , thereby vitiating\n");
-		printf("  such precautions against division by zero as\n");
-		printf("  ...  if (X == 1.0) {.....} else {.../(X-1.0)...}\n");
-		}
-	if (GMult == Yes && GDiv == Yes && GAddSub == Yes) printf(
-		"     *, /, and - appear to have guard digits, as they should.\n");
+	int g_add_sub {0};
+	if ((x==u1) && (y==u1) && (z==u2) && (t==u2)) {
+		g_add_sub = 1;  // "yes"
+	} else {
+		g_add_sub = 0;  // "no"
+		g_error_count[Serious] += 1;
+		std::cout << print_error(Serious, "- lacks Guard Digit, so cancellation is obscured");
+		//TstCond (Serious, False,
+		//	"- lacks Guard Digit, so cancellation is obscured");
+	}
+	if ((f9!=one) && ((f9-one)>=zero)) {
+		//BadCond(Serious, "comparison alleges  (1-U1) < 1  although\n");
+		g_error_count[Serious] += 1;
+		std::cout << print_error(Serious, "comparison alleges: (1-u1)<1, although\n"
+			"\tsubtraction yields (1-u1)-1==0, thereby vitiating\n"
+			"\tsuch precautions against division by zero as\n"
+			"\t...  if (X == 1.0) {.....} else {.../(X-1.0)...}\n");
+	}
+	
+	if (g_mult == 1 && g_div == 1 && g_add_sub == 1) {
+		std::cout << "*, /, and - appear to have guard digits, as they should.\n";
+	}
+	std::cout << std::endl;
+	//if (GMult == Yes && GDiv == Yes && GAddSub == Yes) printf(
+	//	"     *, /, and - appear to have guard digits, as they should.\n");
 
 }
 
