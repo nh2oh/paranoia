@@ -224,7 +224,11 @@ q
 #include <cstdint>
 #include <array>
 
-
+enum class rounding_t {
+	other=0,
+	rounded=1,
+	chopped=2	
+};
 
 #define Flaw    3
 #define Defect  2
@@ -293,4 +297,13 @@ struct m35_result_t {
 };
 m35_result_t milestone_35(double,double,double,double,double,double);
 
+struct m40_result_t {
+	rounding_t r_mult {rounding_t::other};
+	rounding_t r_div {rounding_t::other};
+	rounding_t r_add_sub {rounding_t::other};
+	double radix_d2 {0.0};
+	double a1 {0.0};
+	double a_inverse {0.0};
+};
+m40_result_t milestone_40(double,double,int);
 

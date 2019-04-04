@@ -39,6 +39,9 @@
     <ClCompile Include="milestone_35.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="milestone_40.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="paranoiapp.h">
