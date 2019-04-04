@@ -307,3 +307,11 @@ struct m40_result_t {
 };
 m40_result_t milestone_40(double,double,int);
 
+struct m45_result_t {
+	int whatever {0};
+};
+m45_result_t milestone_45(double, double, double, double);
+
+
+
+
