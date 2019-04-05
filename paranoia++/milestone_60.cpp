@@ -32,10 +32,11 @@ void milestone_60(int num_trials, double u1, double u2) {
 	double half = one/two;
 	double one_and_half = 1.5;
 
-	std::random_device rd;
-	std::mt19937_64 re(rd());
-	std::uniform_real_distribution<double>
-		rdist(std::numeric_limits<double>::lowest()/3.0,std::numeric_limits<double>::max()/3.0);
+	//std::random_device rd;
+	//std::mt19937_64 re(rd());
+	//std::uniform_real_distribution<double>
+	//	//rdist(std::numeric_limits<double>::lowest()/3.0,std::numeric_limits<double>::max()/3.0);
+	//	rdist(-1000.0,1000.0);
 
 	std::cout << "Does Multiplication commute?\nTesting on " 
 		<< std::to_string(num_trials) << " random pairs.\n" << std::endl;
@@ -45,9 +46,13 @@ void milestone_60(int num_trials, double u1, double u2) {
 	double x {0.0};
 	double y {0.0};
 	double random_9 = std::sqrt(3.0);
-	double random_1 = rdist(re);  // Random1 = Third;
+	double random_1 = one/three;  //rdist(re);  // Random1 = Third;
 	// In the C version, 'Third' is at this point an uninitialized double; this is its
-	// first point of use.  sqrt(3.0) does not seem very random.  
+	// first point of use.  However, in the Basic version (see below), random_1 (X9)
+	// appears to be initialized to one/three.  Neither this, nor sqrt(3.0) seems very 
+	// random.  
+	// TODO:  Investigate this; when i init random_1 using std::mt19937_64 re(rd());
+	// std::uniform_real_distribution<double>, the tests fail.  
 	int i = 1;
 	do {
 		x = kahan_rand(random_1,random_9);  //x = Random();
