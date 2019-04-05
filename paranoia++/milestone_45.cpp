@@ -1,7 +1,6 @@
 #include "paranoiapp.h"
 #include <iostream>
 #include <string>
-#include <cmath>  // std::floor()
 
 //
 // Rounding RMult, RDiv, RAddSub, RSqrt;   Type is 'Rounding'
@@ -10,17 +9,19 @@
 //     Replaced here with enum class rounding_t
 //
 // Sets globals:  X,Y,Z,T,Y1,Y2
-//                RDiv,GDiv;  ** may also depend on the initial value RDiv**
+//                RDiv  ** may depend on the initial value RDiv**
 //                BInvrse
 // 
 // First use of...
-//
-//
-// Reads, but does not set:  U1,U2,F9,Radix
+//     X,Y,Z,T, milestone 50, reset before use
+//     Y1,Y2, milestone 85+later, *appear* to be reset before use...
 //     
+//     RDiv, milestone 50, does not reset before use
+//     BInvrse, milestone 70, does not reset before use
 //
-//
-m45_result_t milestone_45(double radix, double u1, double u2, double f9) {
+// Reads, but does not set:  U1,U2,F9,Radix,g_div
+// 
+m45_result_t milestone_45(double radix, double u1, double u2, double f9, int g_div, rounding_t r_div) {
 	double zero = 0;
 	double one = 1;
 	double two = one+one;
@@ -56,30 +57,37 @@ m45_result_t milestone_45(double radix, double u1, double u2, double f9) {
 		z = z-one_and_half;  //Z = Z - one_and_half;
 		y2 = y1-y2;  //Y2 = Y1 - Y2;
 		y1 = (f9-u1)/f9;  //Y1 = (F9 - U1) / F9;
-		if ((x==zero) && (y==zero) && (x==zero) && (t==zero) && (y2==zero) && (y2==zero)
+		if ((x==zero) && (y==zero) && (x==zero) && (t==zero) && (y2==zero) 
 					&& ((y1-half)==(f9-half))) {
 			r_div = rounding_t::rounded;  //RDiv = Rounded;
-			printf("Division appears to round correctly.\n");
-			if (g-div == 0) {
-				notify("Division");
+			std::cout << "Division appears to round correctly.\n";
+			if (g_div == 0) {
+				std::cout << "Division test appears to be inconsistent...\n";
+				std::cout << "\tPLEASE NOTIFY KARPINKSI!\n";
 			}
 		} else if ((x<zero) && (y<zero) && (z<zero) && (t<zero) && (y2<zero) 
 					&& ((y1-half) < (f9-half))) {
 			r_div = rounding_t::chopped;  //RDiv = Chopped;
-			printf("Division appears to chop.\n");
+			std::cout << "Division appears to chop.\n";
 		}
 	}
 
 	// if (RDiv == Other)
 	if (r_div == rounding_t::other) {
-		printf("/ is neither chopped nor correctly rounded.\n");
+		std::cout << "/ is neither chopped nor correctly rounded.\n";
 	}
 	
-	b_inverse = one/radix;  //BInvrse = One / Radix;
-	TstCond (Failure, (BInvrse * Radix - Half == Half),
-		"Radix * ( 1 / Radix ) differs from 1");
+	double b_inverse = one/radix;  //BInvrse = One / Radix;
+	if ((b_inverse*radix - half) != half) {
+		g_error_count[Failure] += 1;
+		std::cout << "Radix*(1/Radix ) differs from 1\n";
+		//TstCond (Failure, (BInvrse * Radix - Half == Half),
+		//	"Radix * ( 1 / Radix ) differs from 1");
+	}
 
 	m45_result_t result;
+	result.r_div = r_div;
+	result.b_inverse = b_inverse;
 	return result;
 }
 
@@ -131,4 +139,23 @@ m45_result_t milestone_45(double radix, double u1, double u2, double f9) {
 //BInvrse = One / Radix;
 //TstCond (Failure, (BInvrse * Radix - Half == Half),
 //	"Radix * ( 1 / Radix ) differs from 1");
+
+
+
+//
+// From the Basic version:
+//
+//2470 L=45 : ' ================================================================
+//2480 Y2=O1+U2 :Y1=O1-U2 : Z=T5+U2+U2 : X=Z/Y2 : T=T5-U2-U2 : Y=(T-U2)/Y1 : Z=(Z+U2)/Y2 : X=X-T5 : Y=Y-T : T=T/Y1 : Z=Z-(T5+U2) : T=(U2-T5)+T : IF ( X>O OR Y>O OR Z>O OR T>O ) THEN 2540
+//2490 X=T5/Y2 : Y=T5-U2 : Z=T5+U2 : X=X-Y : T=T5/Y1 : Y=Y/Y1 : T=T-(Z+U2) : Y=Y-Z : Z=Z/Y2 : Y1=(Y2+U2)/Y2 : Z=Z-T5 : Y2=Y1-Y2 : Y1=(F9-U1)/F9 : IF ( X=O AND Y=O AND Z=O AND T=O AND Y2=O AND Y1-F2=F9-F2 ) THEN R2=O1
+//2500 IF ( X<O AND Y<O AND Z<O AND T<O AND Y2<O AND Y1-F2<F9-F2 ) THEN R2=O
+//	2510 IF (R2=O) THEN PRINT "  R2=0:";D$;E$;C$;"."
+//	2520 IF (R2=O1) THEN PRINT "  R2=1:";D$;E$;B$
+//	2530 IF (R2-G2=O1) THEN PRINT F$;D$;P$
+//	2540 IF (R2=F1) THEN PRINT D$;H$;C$;" nor ";B$
+//	2550 B1=O1/B : IF (B1*B-F2=F2) THEN 2580
+//	2560 J0=J0+1
+//	2570 PRINT F$;"  B*(1/B)  differs from  1."
+//
+//
 
