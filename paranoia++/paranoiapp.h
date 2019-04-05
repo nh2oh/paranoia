@@ -313,6 +313,14 @@ struct m45_result_t {
 };
 m45_result_t milestone_45(double, double, double, double, int, rounding_t);
 
+struct m50_result_t {
+	double sticky_bit {0.0};
+	rounding_t r_add_sub {rounding_t::other};
+};
+m50_result_t milestone_50(double, double, double, double, double, double,
+	rounding_t, rounding_t, rounding_t, int, int, int);
+
+
 
 
 
