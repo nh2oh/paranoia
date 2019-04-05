@@ -48,6 +48,12 @@
     <ClCompile Include="milestone_50.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="milestone_60.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="kahan_rand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="paranoiapp.h">

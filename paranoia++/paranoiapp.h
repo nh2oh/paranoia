@@ -262,6 +262,7 @@ void TstPtUf();
 
 
 // Rewrites
+double kahan_rand(double,double);
 
 extern std::array<int,4> g_error_count ;
 
@@ -321,6 +322,7 @@ m50_result_t milestone_50(double, double, double, double, double, double,
 	rounding_t, rounding_t, rounding_t, int, int, int);
 
 
+void milestone_60(int,double,double);
 
 
 
