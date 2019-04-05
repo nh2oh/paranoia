@@ -264,6 +264,15 @@ void TstPtUf();
 // Rewrites
 double kahan_rand(double,double);
 
+struct sqxminx_return_type_t {
+	double j {0.0};
+	double sq_err {0.0};
+	double min_sq_err {0.0};
+	double max_sq_err {0.0};
+};
+sqxminx_return_type_t sq_x_minx(int,double,double,double,double,double,double);
+
+
 extern std::array<int,4> g_error_count ;
 
 std::string print_error(int, const std::string&);
