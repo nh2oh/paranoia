@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="extras.cpp" />
     <ClCompile Include="kahan_rand.cpp" />
     <ClCompile Include="milestone_20.cpp" />
     <ClCompile Include="milestone_10.cpp" />
@@ -30,6 +31,7 @@
     <ClCompile Include="milestone_50.cpp" />
     <ClCompile Include="milestone_60.cpp" />
     <ClCompile Include="milestone_7.cpp" />
+    <ClCompile Include="milestone_70.cpp" />
     <ClCompile Include="paranoiapp.cpp" />
     <ClCompile Include="test_partial_underflow.cpp" />
   </ItemGroup>
